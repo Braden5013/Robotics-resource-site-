@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" layout="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-compatible" layout='ie=edge'>
+        <link rel="stylesheet" href={{url_for('static' ,filename='styles.css')}}>
+        <title>{% block title %} {% endblock %}</title>
+        {% endblock %}
+    </head>
+    
+    {% block Navbar %}
+    <div class="topnav">
+        <a class="active" href="/Home">Home</a>
+        <a href="/Robots">Robots</a>
+        <a href="/Mechanisims">Mechanisims</a>
+    </div>
+    {% endblock %}
+</html>
