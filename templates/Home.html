@@ -4,5 +4,9 @@
 <link rel="stylesheet" href={{url_for('static' ,filename='styles.css')}}>
 {% endblock %}
 {% block navbar %}
-
+{% block navcontents%}
+<a class="active" href="/">Home</a>
+<a href="/Robots">Robots</a>
+<a href="/Mechanisims">Mechanisims</a>
+{% endblock %}
 {% endblock %}
