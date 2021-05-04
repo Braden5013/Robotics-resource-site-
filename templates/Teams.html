@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Teams{% endblock %}
 {% block head %}
 <link rel="stylesheet" href={{url_for('static' ,filename='styles.css')}}>
 {% endblock %}
 {% block navbar %}
-{% block navcontents%}
-<a class="active" href="/">Home</a>
+{% block navcontents %}
+<a href="/">Home</a>
 <a href="/Robots">Robots</a>
 <a href="/Mechanisims">Mechanisims</a>
-<a href="/Teams">Teams</a>
+<a class="active" href="/Teams">Teams</a>
 {% endblock %}
 {% endblock %}

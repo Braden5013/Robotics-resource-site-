@@ -1,12 +1,38 @@
-{% extends "layout.html" %}
-{% block title %}Robots{% endblock %}
-{% block head %}
-<link rel="stylesheet" href={{url_for('static' ,filename='styles.css')}}>
-{% endblock %}
-{% block navbar %}
-{% block navcontents %} 
-<a href="/">Home</a>
-<a class="active" href="/Robots">Robots</a>
-<a href="/Mechanisims">Mechanisims</a>
-{% endblock %}
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    {% extends "layout.html" %}
+    {% block title %}Robots{% endblock %}
+    {% block head %}
+    <link rel="stylesheet" href={{url_for('static' ,filename='styles.css')}}>
+    {% endblock %}
+    {% block navbar %}
+    {% block navcontents %} 
+    <a href="/">Home</a>
+    <a class="active" href="/Robots">Robots</a>
+    <a href="/Mechanisims">Mechanisims</a>
+    <a href="/Teams">Teams</a>
+    {% endblock %}
+    {% endblock %}
+
+        <table title="I'm a table">
+            
+            <tr>
+                <th>id</th>
+                <th>team_id</th>
+                <th>year</th>
+                <th>game</th>
+                <th>drive_train_id</th>
+            </tr>
+            {% for item in results %}
+            <tr>
+                <td>{{ item[1] }}</td>
+                <td>{{ item[2] }}</td>
+                <td>{{ item[3] }}</td>
+                <td>{{ item[4] }}</td>
+                <td>{{ item[5] }}</td>
+                <td>
+            </tr>
+            {% endfor %}
+        </table>
+
+</html>
