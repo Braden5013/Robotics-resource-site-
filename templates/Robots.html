@@ -13,6 +13,7 @@
     <a href="/Teams">Teams</a>
     {% endblock %}
     {% endblock %}
+    {% block contents %}
 
         <table title="I'm a table">
             
@@ -30,9 +31,8 @@
                 <td>{{ item[3] }}</td>
                 <td>{{ item[4] }}</td>
                 <td>{{ item[5] }}</td>
-                <td>
             </tr>
             {% endfor %}
         </table>
-
+    {% endblock %}
 </html>

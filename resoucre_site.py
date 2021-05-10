@@ -1,3 +1,7 @@
+#note to self this is the code needed to upload to github
+#git config --global user.email "you@example.com"
+#git config --global user.name "Your Name"
+
 #imports falsk and sqlite3 
 from flask import Flask,g,render_template,redirect,request
 import sqlite3
@@ -38,6 +42,10 @@ def Mechanisims():
 @app.route("/Teams")
 def Teams():
     return render_template("Teams.html")
+
+@app.route("/layout")
+def layout():
+    return render_template("layout.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
