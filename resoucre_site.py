@@ -7,7 +7,7 @@ from flask import Flask,g,render_template,redirect,request
 import sqlite3
 app = Flask(__name__)
 
-DATABASE= 'Robotics resource site.db'
+DATABASE = 'Robotics resource site.db'
 
 # need in all databases makes connection with database 
 def get_db():
@@ -37,11 +37,20 @@ def Robots():
 
 @app.route("/Mechanisims")
 def Mechanisims():
-    return render_template("Mechanisims.html")
+        cursor = get_db().cursor()
+        sql = "SELECT * FROM drive_train"
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        return render_template("Mechanisims.html")
 
 @app.route("/Teams")
 def Teams():
-    return render_template("Teams.html")
+        cursor = get_db().cursor()
+        sql = "SELECT * FROM team"
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        return render_template("Teams.html")
+
 
 @app.route("/layout")
 def layout():
