@@ -4,54 +4,60 @@
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+
 }
 
 /* Add a black background color to the top navigation */
 
 
 body {
-  background-color: #505050;
-  padding: 0%;
-  margin: 0%;
-  
-
+background-image: url(background.jpg);
+}
+.contents {
+  background-color: #777777;
+  max-width: 1500px;
+  margin: auto;
+  margin-bottom: 0%;
+  margin-top: 5%;
+  padding-top: 5%;
+  padding-bottom: 50%;
 }
 
 .topnav {
-    background-color: rgb(0, 0, 0);
-    overflow: hidden;
-    width: 100%;
-    margin-top: 10%;
-    margin-bottom: 10%;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 12px 0px;
-    text-decoration: none;
-    font-size: 17px;
-    font-family: monospace;
-    width: 25%;
+  background-color: rgb(0, 0, 0);
+  overflow: hidden;
+  width: 100%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
 
-  }
-  
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: rgb(163, 27, 27);
-    color: rgb(255, 255, 255);
-  }
-  
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #ff0000;
-    color: white;
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 12px 0px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: monospace;
+  width: 25%;
 
-  }
+}
 
-  
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: rgb(163, 27, 27);
+  color: rgb(255, 255, 255);
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #ff0000;
+  color: white;
+
+}
+
+
 
 
 table {
@@ -77,9 +83,3 @@ tr:nth-child(n) {
     width: 20%;
 }
 
-footer{
-    background-color: #7c1111;
-    padding: 50px;
-    margin-top: 20%;
-
-}

@@ -12,24 +12,24 @@
      
     </head>
     <body>
-        {% block logo %}
-        <H1>
-        <img src="static/robotic logo.png" alt="Logo.png"  title="Logo" class="center"> 
-        </H1>
-        {% endblock %}
-        {% block Navbar %}
-        <div class="topnav">
-        {% block navcontents %} {% endblock %}
-        </div>
-        {% endblock %}
-        {% block contents %}
-            
-        {% endblock %}  
-    </body>
-    <footer>
         
-    
-    </footer>
+        <div class="contents">
+            {% block logo %}
+            <H1>
+            <img src="static/robotic logo.png" alt="Logo.png"  title="Logo" class="center"> 
+            </H1>
+            {% endblock %}
+            {% block Navbar %}
+            <div class="topnav">
+            {% block navcontents %} {% endblock %}
+            </div>
+            {% endblock %}
+            {% block contents %}
+                
+            {% endblock %} 
+        </div> 
+    </body>
+
     
 
 </html>

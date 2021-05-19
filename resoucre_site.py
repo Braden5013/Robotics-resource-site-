@@ -41,7 +41,7 @@ def Mechanisims():
         sql = "SELECT * FROM drive_train"
         cursor.execute(sql)
         results = cursor.fetchall()
-        return render_template("Mechanisims.html")
+        return render_template("Mechanisims.html", results=results)
 
 @app.route("/Teams")
 def Teams():
@@ -49,7 +49,7 @@ def Teams():
         sql = "SELECT * FROM team"
         cursor.execute(sql)
         results = cursor.fetchall()
-        return render_template("Teams.html")
+        return render_template("Teams.html", results=results)
 
 
 @app.route("/layout")
