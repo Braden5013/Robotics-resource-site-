@@ -7,6 +7,8 @@
 
 }
 
+
+
 /* Add a black background color to the top navigation */
 
 
@@ -14,13 +16,14 @@ body {
 background-image: url(background.jpg);
 }
 .contents {
-  background-color: #777777;
+  background-color: #77777779;
   max-width: 1500px;
   margin: auto;
   margin-bottom: 0%;
   margin-top: 5%;
   padding-top: 5%;
   padding-bottom: 50%;
+  border-radius: 5%;
 }
 
 .topnav {
@@ -40,19 +43,19 @@ background-image: url(background.jpg);
   text-decoration: none;
   font-size: 17px;
   font-family: monospace;
-  width: 25%;
+  width: 20%;
 
 }
 
 /* Change the color of links on hover */
 .topnav a:hover {
-  background-color: rgb(163, 27, 27);
+  background-color: rgb(165, 34, 34);
   color: rgb(255, 255, 255);
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #ff0000;
+  background-color: #db1d1d;
   color: white;
 
 }
@@ -62,24 +65,24 @@ background-image: url(background.jpg);
 
 table {
 
-    color: rgb(255, 255, 255);
-    font-family: cursive, sans-serif;
-    border-collapse: collapse;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+  color: rgb(255, 255, 255);
+  font-family: cursive, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
 
 
 }
 td, th{
-    border: 5px solid #3b3a3a;
-    text-align:  left;
-    padding: 5px 0px;
-    
+  border: 5px solid #3b3a3a;
+  text-align:  left;
+  padding: 5px 0px;
+  
 }
 
 tr:nth-child(n) {
-    background-color: #b12727;
-    width: 20%;
+  background-color: #b12727;
+  width: 20%;
 }
 

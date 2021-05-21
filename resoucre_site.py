@@ -51,6 +51,9 @@ def Teams():
         results = cursor.fetchall()
         return render_template("Teams.html", results=results)
 
+@app.route("/Editor")
+def Editor():
+    return render_template("Editor.html")
 
 @app.route("/layout")
 def layout():
