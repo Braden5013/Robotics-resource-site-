@@ -23,17 +23,63 @@
         <th>year</th>
         <th>game</th>
         <th>drive_train_id</th>
+        <th>delete</th>
     </tr>
-    {% for item in results %}
+    {% for item in results1 %}
     <tr>
         <td>{{ item[0] }}</td>
         <td>{{ item[1] }}</td>
         <td>{{ item[2] }}</td>
         <td>{{ item[3] }}</td>
         <td>{{ item[4] }}</td>
+        <td>
+            <form action="/delete_Robot" method="post">
+            <input type="hidden" name="item_name" value="{{item[0]}}">
+            <input type="submit" value="delete">  
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>
-</div>
 
+<form action="/add_Robot" method="post">
+    <h1>Enter a new item</h2>
+    <pre>id team_id year game drive_train_id</pre>
+    <input type="text" name="id">
+    <input type="text" name="team_id">
+    <input type="text" name="year">
+    <input type="text" name="game">
+    <input type="text" name="drive_train_id">
+    <input type="submit" Value="add">
+</form>
+</div>
+<div class="teams_table_editor">
+    <table title="I'm a table">
+                
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>delete</th>
+        </tr>
+        {% for item in results2 %}
+        <tr>
+            <td>{{ item[0] }}</td>
+            <td>{{ item[1] }}</td>
+            <td>
+                <form action="/delete_teams" method="post">
+                <input type="hidden" name="item_name" value="{{item[0]}}">
+                <input type="submit" value="delete">  
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <form action="/add_teams" method="post">
+        <h1>Enter a new item</h2>
+        <input type="text" name="id">
+        <input type="text" name="name">
+        <input type="submit" Value="add">
+    </form>
+    </div>
 {% endblock %}

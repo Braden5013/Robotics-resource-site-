@@ -10,7 +10,15 @@
 
 
 /* Add a black background color to the top navigation */
+.error {
+  margin: 15% 30%;
+  font-size: 200PX;
+  color: white;
+}
 
+.error:hover{
+color: red;
+}
 
 body {
 background-image: url(background.jpg);
@@ -65,8 +73,8 @@ background-image: url(background.jpg);
 
 table {
 
-  color: rgb(255, 255, 255);
-  font-family: cursive, sans-serif;
+  color: rgb(0, 0, 0);
+  font-family: sans-serif;
   border-collapse: collapse;
   width: 90%;
   margin-left: 5%;
@@ -75,14 +83,14 @@ table {
 
 }
 td, th{
-  border: 5px solid #3b3a3a;
+  border: 2px solid #000000;
   text-align:  left;
-  padding: 5px 0px;
+  
   
 }
 
 tr:nth-child(n) {
-  background-color: #b12727;
+  background-color: #ececec;
   width: 20%;
 }
 

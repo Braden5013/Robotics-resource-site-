@@ -53,11 +53,79 @@ def Teams():
 
 @app.route("/Editor")
 def Editor():
-    return render_template("Editor.html")
+        cursor = get_db().cursor()
+        sql = "SELECT * FROM design"
+        cursor.execute(sql)
+        results1 = cursor.fetchall()
+
+        cursor = get_db().cursor()
+        sql = "SELECT * FROM team"
+        cursor.execute(sql)
+        results2 = cursor.fetchall()
+
+        cursor = get_db().cursor()
+        sql = "SELECT * FROM drive_train"
+        cursor.execute(sql)
+        results3 = cursor.fetchall()
+        return render_template("Editor.html", results1=results1, results2=results2, results3=results3)
 
 @app.route("/layout")
 def layout():
     return render_template("layout.html")
+
+@app.route('/add_Robot', methods=["GET","POST"])
+def add_Robot():
+    if request.method == "POST":
+        print("adding")
+        cursor = get_db().cursor()
+        new_id = request.form["id"]
+        new_team_id = request.form["team_id"]
+        new_year = request.form["year"]
+        new_game = request.form["game"]
+        new_train_id = request.form["drive_train_id"]
+        sql = "INSERT INTO design(id,team_id,year,game,drive_train_id) VALUES (?,?,?,?,?)"
+        cursor.execute(sql,(new_id,new_team_id,new_year,new_game,new_train_id))
+        get_db().commit()
+    return redirect('/Editor')
+
+@app.route('/delete_Robot', methods=["GET","POST"])
+def delete_Robot():
+    if request.method == "POST":
+        cursor = get_db().cursor()
+        id = int(request.form["item_name"])
+        sql = "DELETE FROM design WHERE id=?"
+        cursor.execute(sql,(id,))
+        get_db().commit()
+    return redirect('/Editor') 
+
+@app.route('/add_teams', methods=["GET","POST"])
+def add_teams():
+    try:
+        if request.method == "POST":
+            print("adding")
+            cursor = get_db().cursor()
+            new_team_id = request.form["id"]
+            new_name = request.form["name"]
+            sql = "INSERT INTO team (id,name) VALUES (?,?)"
+            cursor.execute(sql,(new_team_id,new_name))
+            get_db().commit()
+    except:
+        return redirect('/Error')
+    return redirect('/Editor')
+
+@app.route('/delete_teams', methods=["GET","POST"])
+def delete_teams():
+    if request.method == "POST":
+        cursor = get_db().cursor()
+        id = int(request.form["item_name"])
+        sql = "DELETE FROM team WHERE id=?"
+        cursor.execute(sql,(id,))
+        get_db().commit()
+    return redirect('/Editor') 
+
+@app.route("/Error")
+def Error():
+    return render_template("Error.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
