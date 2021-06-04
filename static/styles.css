@@ -7,7 +7,23 @@
 
 }
 
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-color: #db1d1d;
+  transition: 0.3s;
+  width: 15%;
+  margin: 200px;
+}
 
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+.container {
+  padding: 2px 16px;
+}
 
 /* Add a black background color to the top navigation */
 .error {
@@ -32,6 +48,7 @@ background-image: url(background.jpg);
   padding-top: 5%;
   padding-bottom: 50%;
   border-radius: 5%;
+  box-shadow: 0  4px 8px 0 #000000;
 }
 
 .topnav {
