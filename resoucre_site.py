@@ -123,6 +123,31 @@ def delete_teams():
         get_db().commit()
     return redirect('/Editor') 
 
+@app.route('/add_drive_train', methods=["GET","POST"])
+def add_drive_train():
+    try:
+        if request.method == "POST":
+            print("adding")
+            cursor = get_db().cursor()
+            new_drive_train_id = request.form["id"]
+            new_type = request.form["type"]
+            sql = "INSERT INTO drive_train (id,type) VALUES (?,?)"
+            cursor.execute(sql,(new_drive_train_id,new_type))
+            get_db().commit()
+    except:
+        return redirect('/Error')
+    return redirect('/Editor')
+
+@app.route('/delete_drive_train', methods=["GET","POST"])
+def delete_drive_train():
+    if request.method == "POST":
+        cursor = get_db().cursor()
+        id = int(request.form["item_name"])
+        sql = "DELETE FROM drive_train WHERE id=?"
+        cursor.execute(sql,(id,))
+        get_db().commit()
+    return redirect('/Editor')
+
 @app.route("/Error")
 def Error():
     return render_template("Error.html")
