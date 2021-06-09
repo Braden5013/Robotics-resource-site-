@@ -15,27 +15,8 @@
     {% endblock %}
     {% endblock %}
     {% block contents %}
-
-        <table title="I'm a table">
-            
-            <tr>
-                <th>id</th>
-                <th>team_id</th>
-                <th>year</th>
-                <th>game</th>
-                <th>drive_train_id</th>
-            </tr>
-            {% for item in results %}
-            <tr>
-                <td>{{ item[0] }}</td>
-                <td>{{ item[1] }}</td>
-                <td>{{ item[2] }}</td>
-                <td>{{ item[3] }}</td>
-                <td>{{ item[4] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
         
+     <div class="cards_package">
         {% for item in results %}
         <div class="card">
             <img class="robot_image" src="static/robot.jpg" alt="Avatar" style="width:100%">
@@ -50,6 +31,7 @@
             </div>
         </div>
         {% endfor %}
+     </div>
     {% endblock %}
 /* page to help with griding cards https://www.w3schools.com/howto/howto_css_column_cards.asp */
 </html>
