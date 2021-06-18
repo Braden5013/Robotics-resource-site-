@@ -54,7 +54,7 @@ def Teams():
 @app.route("/Editor")
 def Editor():
         cursor = get_db().cursor()
-        sql = "SELECT * FROM design"
+        sql = "SELECT design.design_id, team.name, design.year, design.game from design join team ON design.team_id=team.team_id"
         cursor.execute(sql)
         results1 = cursor.fetchall()
 
@@ -73,18 +73,21 @@ def Editor():
 def layout():
     return render_template("layout.html")
 
+
+
+
 @app.route('/add_Robot', methods=["GET","POST"])
 def add_Robot():
+
     if request.method == "POST":
         print("adding")
         cursor = get_db().cursor()
-        new_id = request.form["id"]
         new_team_id = request.form["team_id"]
         new_year = request.form["year"]
         new_game = request.form["game"]
         new_train_id = request.form["drive_train_id"]
-        sql = "INSERT INTO design(id,team_id,year,game,drive_train_id) VALUES (?,?,?,?,?)"
-        cursor.execute(sql,(new_id,new_team_id,new_year,new_game,new_train_id))
+        sql = "INSERT INTO design (team_id,year,game,drive_train_id) VALUES (?,?,?,?)"
+        cursor.execute(sql,(new_team_id,new_year,new_game,new_train_id))
         get_db().commit()
     return redirect('/Editor')
 
@@ -93,7 +96,7 @@ def delete_Robot():
     if request.method == "POST":
         cursor = get_db().cursor()
         id = int(request.form["item_name"])
-        sql = "DELETE FROM design WHERE id=?"
+        sql = "DELETE FROM design WHERE design_id=?"
         cursor.execute(sql,(id,))
         get_db().commit()
     return redirect('/Editor') 
@@ -106,7 +109,7 @@ def add_teams():
             cursor = get_db().cursor()
             new_team_id = request.form["id"]
             new_name = request.form["name"]
-            sql = "INSERT INTO team (id,name) VALUES (?,?)"
+            sql = "INSERT INTO team (team_id,name) VALUES (?,?)"
             cursor.execute(sql,(new_team_id,new_name))
             get_db().commit()
     except:
@@ -131,7 +134,7 @@ def add_drive_train():
             cursor = get_db().cursor()
             new_drive_train_id = request.form["id"]
             new_type = request.form["type"]
-            sql = "INSERT INTO drive_train (id,type) VALUES (?,?)"
+            sql = "INSERT INTO drive_train (drive_train_id,type) VALUES (?,?)"
             cursor.execute(sql,(new_drive_train_id,new_type))
             get_db().commit()
     except:
@@ -154,3 +157,5 @@ def Error():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+#SELECT design.year,design.game,team.name from design join team ON design.team_id=team.team_id

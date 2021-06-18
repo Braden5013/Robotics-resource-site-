@@ -18,38 +18,57 @@
 <table title="I'm a table">
             
     <tr>
-        <th>id</th>
-        <th>team_id</th>
-        <th>year</th>
+        <th>Team</th>
+        <th>Year</th>
         <th>game</th>
-        <th>drive_train_id</th>
         <th>delete</th>
     </tr>
     {% for item in results1 %}
     <tr>
-        <td>{{ item[0] }}</td>
         <td>{{ item[1] }}</td>
         <td>{{ item[2] }}</td>
         <td>{{ item[3] }}</td>
-        <td>{{ item[4] }}</td>
+
         <td>
             <form action="/delete_Robot" method="post">
             <input type="hidden" name="item_name" value="{{item[0]}}">
             <input type="submit" value="delete">  
             </form>
-        </td>
+        </td> 
     </tr>
     {% endfor %}
 </table>
 
-<form action="/add_Robot" method="post">
-    <h1>Enter a new item</h2>
-    <pre>id team_id year game drive_train_id</pre>
-    <input type="text" name="id">
-    <input type="text" name="team_id">
-    <input type="text" name="year">
-    <input type="text" name="game">
-    <input type="text" name="drive_train_id">
+<form class="add" action="/add_Robot" method="post">
+    <h1>Enter a new Robot</h2>
+
+    <select type="text" name="team_id">
+        <option value="none" selected disabled hidden>select a team
+        {% for item in results2 %}
+        <option value= {{ item[0] }}>{{ item[1] }}</option>
+        {% endfor %}
+    </select>
+
+    <select type="text" name="year">
+        <option value= 2019>2019</option>
+        <option value= 2020>2020</option>
+        <option value= 2021>2021</option>
+    </select> 
+    
+    <select type="text" name="game">
+        <option value= "Turning Point">Turning Point</option>
+        <option value= "Tower Takeover">tower takeover</option>
+        <option value= "Change Up">Change up</option>
+        <option value= "Tipping Point">Tipping Point</option>
+    </select>
+
+
+    <select type="text" name="drive_train_id">
+        {% for item in results3 %}
+        <option value= {{ item[0] }}>{{ item[1] }}</option>
+        {% endfor %}
+    </select>
+
     <input type="submit" Value="add">
 </form>
 </div>
