@@ -14,28 +14,30 @@
 {% endblock %}
 {% block contents %}
 
-<div class="Robot_table_editor">
+<div class="table_editor">
 <table title="I'm a table">
             
     <tr>
         <th>Team</th>
         <th>Year</th>
         <th>game</th>
+        <th>Drive train</th>
         <th>delete</th>
     </tr>
     {% for item in results1 %}
-    <tr>
-        <td>{{ item[1] }}</td>
-        <td>{{ item[2] }}</td>
-        <td>{{ item[3] }}</td>
+        <tr>
+            <td>{{ item[1] }}</td>
+            <td>{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+            <td>{{ item[4] }}</td>
 
-        <td>
-            <form action="/delete_Robot" method="post">
-            <input type="hidden" name="item_name" value="{{item[0]}}">
-            <input type="submit" value="delete">  
-            </form>
-        </td> 
-    </tr>
+            <td>
+                <form action="/delete_Robot" method="post">
+                <input type="hidden" name="item_name" value="{{item[0]}}">
+                <input type="submit" value="delete">  
+                </form>
+            </td> 
+        </tr>
     {% endfor %}
 </table>
 
@@ -50,12 +52,15 @@
     </select>
 
     <select type="text" name="year">
-        <option value= 2019>2019</option>
-        <option value= 2020>2020</option>
-        <option value= 2021>2021</option>
+        <option value="none" selected disabled hidden>select a year
+        <option value= 2018-2019>2018-2019</option>
+        <option value= 2019-2020>2019-2020</option>
+        <option value= 2020-2021>2020-2021</option>
+        <option value= 2021-2022>2021-2022</option>
     </select> 
     
     <select type="text" name="game">
+        <option value="none" selected disabled hidden>select a game
         <option value= "Turning Point">Turning Point</option>
         <option value= "Tower Takeover">tower takeover</option>
         <option value= "Change Up">Change up</option>
@@ -64,6 +69,7 @@
 
 
     <select type="text" name="drive_train_id">
+        <option value="none" selected disabled hidden>select a drive train
         {% for item in results3 %}
         <option value= {{ item[0] }}>{{ item[1] }}</option>
         {% endfor %}
@@ -72,20 +78,18 @@
     <input type="submit" Value="add">
 </form>
 </div>
-<div class="teams_table_editor">
+<div class="table_editor">
     <table title="I'm a table">
                 
         <tr>
-            <th>id</th>
             <th>name</th>
             <th>delete</th>
         </tr>
         {% for item in results2 %}
         <tr>
-            <td>{{ item[0] }}</td>
             <td>{{ item[1] }}</td>
             <td>
-                <form action="/delete_teams" method="post">
+                <form  action="/delete_teams" method="post">
                 <input type="hidden" name="item_name" value="{{item[0]}}">
                 <input type="submit" value="delete">  
                 </form>
@@ -94,25 +98,22 @@
         {% endfor %}
     </table>
     
-    <form action="/add_teams" method="post">
+    <form class="add" action="/add_teams" method="post">
         <h1>Enter a new item</h2>
-        <input type="text" name="id">
-        <input type="text" name="name">
+        <input type="text" name="name" placeholder="Insert team name here">
         <input type="submit" Value="add">
     </form>
     </div>
 
-    <div class="drive_train_table_editor">
+    <div class="table_editor">
         <table title="I'm a table">
                     
             <tr>
-                <th>id</th>
                 <th>type</th>
                 <th>delete</th>
             </tr>
             {% for item in results3 %}
             <tr>
-                <td>{{ item[0] }}</td>
                 <td>{{ item[1] }}</td>
                 <td>
                     <form action="/delete_drive_train" method="post">
@@ -124,10 +125,9 @@
             {% endfor %}
         </table>
         
-        <form action="/add_drive_train" method="post">
+        <form class="add" action="/add_drive_train" method="post">
             <h1>Enter a new item</h2>
-            <input type="text" name="id">
-            <input type="text" name="type">
+            <input type="text" name="type" placeholder="Insert drive train type here">
             <input type="submit" Value="add">
         </form>
         </div>

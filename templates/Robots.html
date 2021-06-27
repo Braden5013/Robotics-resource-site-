@@ -3,7 +3,7 @@
     {% extends "layout.html" %}
     {% block title %}Robots{% endblock %}
     {% block head %}
-    <link rel="stylesheet" href={{url_for('static' ,filename='styles.css')}}>
+    <link rel="stylesheet" href="{{url_for('static' ,filename='styles.css')}}">
     {% endblock %}
     {% block navbar %}
     {% block navcontents %} 
@@ -33,6 +33,8 @@
         {% endfor %}
      </div>
     {% endblock %}
-/* page to help with griding cards https://www.w3schools.com/howto/howto_css_column_cards.asp */
+
+
+    
 </html>
 

@@ -30,7 +30,7 @@ def Home():
 @app.route("/Robots")
 def Robots():
         cursor = get_db().cursor()
-        sql = "SELECT * FROM design"
+        sql = "SELECT design.design_id, team.name, design.year, design.game from design join team ON design.team_id=team.team_id"
         cursor.execute(sql)
         results = cursor.fetchall()
         return render_template("Robots.html", results=results)
@@ -54,17 +54,17 @@ def Teams():
 @app.route("/Editor")
 def Editor():
         cursor = get_db().cursor()
-        sql = "SELECT design.design_id, team.name, design.year, design.game from design join team ON design.team_id=team.team_id"
+        sql = "SELECT design.design_id, team.name, design.year, design.game, drive_train.type FROM design join team ON design.team_id=team.team_id join drive_train ON design.drive_train_id=drive_train.drive_train_id"
         cursor.execute(sql)
         results1 = cursor.fetchall()
 
         cursor = get_db().cursor()
-        sql = "SELECT * FROM team"
+        sql = "SELECT team_id, name FROM team"
         cursor.execute(sql)
         results2 = cursor.fetchall()
 
         cursor = get_db().cursor()
-        sql = "SELECT * FROM drive_train"
+        sql = "SELECT drive_train_id, type FROM drive_train"
         cursor.execute(sql)
         results3 = cursor.fetchall()
         return render_template("Editor.html", results1=results1, results2=results2, results3=results3)
@@ -78,17 +78,19 @@ def layout():
 
 @app.route('/add_Robot', methods=["GET","POST"])
 def add_Robot():
-
-    if request.method == "POST":
-        print("adding")
-        cursor = get_db().cursor()
-        new_team_id = request.form["team_id"]
-        new_year = request.form["year"]
-        new_game = request.form["game"]
-        new_train_id = request.form["drive_train_id"]
-        sql = "INSERT INTO design (team_id,year,game,drive_train_id) VALUES (?,?,?,?)"
-        cursor.execute(sql,(new_team_id,new_year,new_game,new_train_id))
-        get_db().commit()
+    try:
+        if request.method == "POST":
+            print("adding")
+            cursor = get_db().cursor()
+            new_team_id = request.form["team_id"]
+            new_year = request.form["year"]
+            new_game = request.form["game"]
+            new_train_id = request.form["drive_train_id"]
+            sql = "INSERT INTO design (team_id,year,game,drive_train_id) VALUES (?,?,?,?)"
+            cursor.execute(sql,(new_team_id,new_year,new_game,new_train_id))
+            get_db().commit()
+    except:
+        return redirect('/Error')
     return redirect('/Editor')
 
 @app.route('/delete_Robot', methods=["GET","POST"])
@@ -107,10 +109,9 @@ def add_teams():
         if request.method == "POST":
             print("adding")
             cursor = get_db().cursor()
-            new_team_id = request.form["id"]
             new_name = request.form["name"]
-            sql = "INSERT INTO team (team_id,name) VALUES (?,?)"
-            cursor.execute(sql,(new_team_id,new_name))
+            sql = "INSERT INTO team (name) VALUES (?)"
+            cursor.execute(sql,(new_name, ))
             get_db().commit()
     except:
         return redirect('/Error')
@@ -121,24 +122,23 @@ def delete_teams():
     if request.method == "POST":
         cursor = get_db().cursor()
         id = int(request.form["item_name"])
-        sql = "DELETE FROM team WHERE id=?"
+        sql = "DELETE FROM team WHERE team_id=?"
         cursor.execute(sql,(id,))
         get_db().commit()
     return redirect('/Editor') 
 
 @app.route('/add_drive_train', methods=["GET","POST"])
 def add_drive_train():
-    try:
-        if request.method == "POST":
-            print("adding")
-            cursor = get_db().cursor()
-            new_drive_train_id = request.form["id"]
-            new_type = request.form["type"]
-            sql = "INSERT INTO drive_train (drive_train_id,type) VALUES (?,?)"
-            cursor.execute(sql,(new_drive_train_id,new_type))
-            get_db().commit()
-    except:
-        return redirect('/Error')
+    #try:
+    if request.method == "POST":
+        print("adding")
+        cursor = get_db().cursor()
+        new_type = request.form["type"]
+        sql = "INSERT INTO drive_train (type) VALUES (?)"
+        cursor.execute(sql,(new_type, ))
+        get_db().commit()
+    #except:
+        #return redirect('/Error')
     return redirect('/Editor')
 
 @app.route('/delete_drive_train', methods=["GET","POST"])
@@ -146,7 +146,7 @@ def delete_drive_train():
     if request.method == "POST":
         cursor = get_db().cursor()
         id = int(request.form["item_name"])
-        sql = "DELETE FROM drive_train WHERE id=?"
+        sql = "DELETE FROM drive_train WHERE drive_train_id=?"
         cursor.execute(sql,(id,))
         get_db().commit()
     return redirect('/Editor')
