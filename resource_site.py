@@ -5,6 +5,7 @@
 #imports falsk and sqlite3 
 from flask import Flask,g,render_template,redirect,request
 import sqlite3
+import os
 app = Flask(__name__)
 
 DATABASE = 'Robotics resource site.db'
@@ -30,11 +31,11 @@ def Home():
 @app.route("/Robots")
 def Robots():
         cursor = get_db().cursor()
-        sql = "SELECT design.design_id, team.name, design.year, design.game from design join team ON design.team_id=team.team_id"
+        sql = "SELECT design.design_id, team.name, design.year, design.game, drive_train.type FROM design join team ON design.team_id=team.team_id join drive_train ON design.drive_train_id=drive_train.drive_train_id"        
         cursor.execute(sql)
         results = cursor.fetchall()
         return render_template("Robots.html", results=results)
-
+        
 @app.route("/Mechanisims")
 def Mechanisims():
         cursor = get_db().cursor()
@@ -158,4 +159,15 @@ def Error():
 if __name__ == "__main__":
     app.run(debug=True)
 
+@app.route('/upload',methods=["GET","POST"])
+def upload():
+    for file in request.files.getlist("file"):
+        print(file)
+        filename = file.filename
+        destination = os.path.join("static", filename)
+        print(destination)
+        file.save(destination)
+    return redirect("/Editor")
+
+    
 #SELECT design.year,design.game,team.name from design join team ON design.team_id=team.team_id
