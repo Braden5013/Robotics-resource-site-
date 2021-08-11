@@ -39,8 +39,9 @@
                 </form>
             </td> 
             <td> 
-                <form action="/upload" method="POST" enctype="multipart/form-data">
+                <form action="/upload1" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" accept="image/*" multiple>
+                    <input type="hidden" name="item_name" value="{{item[0]}}">
                     <input type="submit" value="send">
                 </form>
             </td>
@@ -102,6 +103,13 @@
                 <input type="submit" value="delete">  
                 </form>
             </td>
+            <td> 
+                <form action="/upload2" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/*" multiple>
+                    <input type="hidden" name="item_name" value="{{item[0]}}">
+                    <input type="submit" value="send">
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </table>
@@ -127,6 +135,13 @@
                     <form action="/delete_drive_train" method="post">
                     <input type="hidden" name="item_name" value="{{item[0]}}">
                     <input type="submit" value="delete">  
+                    </form>
+                </td>
+                <td> 
+                    <form action="/upload3" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="file" accept="image/*" multiple>
+                        <input type="hidden" name="item_name" value="{{item[0]}}">
+                        <input type="submit" value="send">
                     </form>
                 </td>
             </tr>

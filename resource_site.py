@@ -7,6 +7,7 @@ from flask import Flask,g,render_template,redirect,request
 import sqlite3
 import os
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 
 DATABASE = 'Robotics resource site.db'
 
@@ -31,7 +32,7 @@ def Home():
 @app.route("/Robots")
 def Robots():
         cursor = get_db().cursor()
-        sql = "SELECT design.design_id, team.name, design.year, design.game, drive_train.type FROM design join team ON design.team_id=team.team_id join drive_train ON design.drive_train_id=drive_train.drive_train_id"        
+        sql = "SELECT design.design_id, team.name, design.year, design.game, drive_train.type, design.image_path FROM design join team ON design.team_id=team.team_id join drive_train ON design.drive_train_id=drive_train.drive_train_id"        
         cursor.execute(sql)
         results = cursor.fetchall()
         return render_template("Robots.html", results=results)
@@ -130,16 +131,16 @@ def delete_teams():
 
 @app.route('/add_drive_train', methods=["GET","POST"])
 def add_drive_train():
-    #try:
-    if request.method == "POST":
-        print("adding")
-        cursor = get_db().cursor()
-        new_type = request.form["type"]
-        sql = "INSERT INTO drive_train (type) VALUES (?)"
-        cursor.execute(sql,(new_type, ))
-        get_db().commit()
-    #except:
-        #return redirect('/Error')
+    try:
+        if request.method == "POST":
+            print("adding")
+            cursor = get_db().cursor()
+            new_type = request.form["type"]
+            sql = "INSERT INTO drive_train (type) VALUES (?)"
+            cursor.execute(sql,(new_type, ))
+            get_db().commit()
+    except:
+        return redirect('/Error')
     return redirect('/Editor')
 
 @app.route('/delete_drive_train', methods=["GET","POST"])
@@ -156,18 +157,55 @@ def delete_drive_train():
 def Error():
     return render_template("Error.html")
 
-if __name__ == "__main__":
-    app.run(debug=True)
 
-@app.route('/upload',methods=["GET","POST"])
-def upload():
-    for file in request.files.getlist("file"):
-        print(file)
-        filename = file.filename
-        destination = os.path.join("static", filename)
-        print(destination)
-        file.save(destination)
+@app.route('/upload1',methods=["POST"])
+def upload1():
+    try: 
+        request.files['file'].save(f'static/uploads/{request.files["file"].filename}')
+        if request.method == "POST":
+            cursor = get_db().cursor()
+            f = request.files["file"]
+            print(f.filename)
+            id = int(request.form["item_name"])
+            sql = "UPDATE design SET image_path= ? WHERE design_id = ?"
+            cursor.execute(sql,(f.filename,id  ))
+            get_db().commit()
+    except:
+        return redirect('/Error')
     return redirect("/Editor")
 
-    
+@app.route('/upload3',methods=["POST"])
+def upload3():
+    try:
+        request.files['file'].save(f'static/uploads/{request.files["file"].filename}')
+        if request.method == "POST":
+            cursor = get_db().cursor()
+            f = request.files["file"]
+            print(f.filename)
+            id = int(request.form["item_name"])
+            sql = "UPDATE drive_train SET image_path= ? WHERE drive_train_id = ?"
+            cursor.execute(sql,(f.filename,id  ))
+            get_db().commit()
+    except:
+        return redirect('/Error')
+    return redirect("/Editor")
+
+@app.route('/upload2',methods=["POST"])
+def upload2():
+    try:
+        request.files['file'].save(f'static/uploads/{request.files["file"].filename}')
+        if request.method == "POST":
+            cursor = get_db().cursor()
+            f = request.files["file"]
+            print(f.filename)
+            id = int(request.form["item_name"])
+            sql = "UPDATE team SET image_path= ? WHERE team_id = ?"
+            cursor.execute(sql,(f.filename,id  ))
+            get_db().commit()
+    except:
+        return redirect('/Error')
+    return redirect("/Editor")
+   
 #SELECT design.year,design.game,team.name from design join team ON design.team_id=team.team_id
+if __name__ == "__main__":
+    app.run(debug=True)
