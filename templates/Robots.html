@@ -16,11 +16,21 @@
     {% endblock %}
     {% endblock %}
     {% block contents %}
+     
+    <div class="Description"> 
+         <p> This page displays all the information ragarding Burnside High schools vex robotics robots past and present </p>
+     </div>
+
         
      <div class="cards_package">
         {% for item in results %}
         <div class="card">
-            <img class="robot_image" src="/static/uploads/{{item[5]}}" alt="Avatar" style="width:100%">
+            <img class="robot_image" src="
+            {%- if item[5] -%}
+                /static/uploads/{{item[5]}}
+            {%- else -%}
+                /static/defaultimg.gif
+            {%- endif %}" style="width:100%">
             <div class="container">
     
             <div class="id">{{item[0]}}</div>

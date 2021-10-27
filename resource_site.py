@@ -169,7 +169,7 @@ def upload1():
             id = int(request.form["item_name"])
             sql = "UPDATE design SET image_path= ? WHERE design_id = ?"
             cursor.execute(sql,(f.filename,id  ))
-            get_db().commit()
+            get_db().commit()   
     except:
         return redirect('/Error')
     return redirect("/Editor")

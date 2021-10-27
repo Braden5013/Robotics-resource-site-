@@ -15,15 +15,17 @@
 {% block contents %}
 
 <div class="table_editor">
-<table title="I'm a table">
+<table> 
+
+    <h1 class="robot_title">ROBOTS</h1>
             
     <tr>
         <th>Team</th>
         <th>Year</th>
         <th>game</th>
         <th>Drive train</th>
-        <th>delete</th>
-        <th>Add image</th>
+        <th class="table_edit" >delete</th>
+        <th class="table_edit" >Add image</th>
     </tr>
     {% for item in results1 %}
         <tr>
@@ -32,17 +34,17 @@
             <td>{{ item[3] }}</td>
             <td>{{ item[4] }}</td>
 
-            <td>
+            <td class="table_edit">
                 <form action="/delete_Robot" method="post">
                 <input type="hidden" name="item_name" value="{{item[0]}}">
                 <input type="submit" value="delete">  
                 </form>
             </td> 
-            <td> 
+            <td class="table_edit"> 
                 <form action="/upload1" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" accept="image/*" multiple>
                     <input type="hidden" name="item_name" value="{{item[0]}}">
-                    <input type="submit" value="send">
+                    <input class="submit" type="submit" value="send">
                 </form>
             </td>
 
@@ -89,25 +91,28 @@
 </div>
 <div class="table_editor">
     <table title="I'm a table">
-                
+          
+        <h1 class="robot_title">TEAMS</h1>
+
         <tr>
             <th>name</th>
-            <th>delete</th>
+            <th class="table_edit" >delete</th>
+            <th class="table_edit" >Add image</th>
         </tr>
         {% for item in results2 %}
         <tr>
             <td>{{ item[1] }}</td>
-            <td>
+            <td class="table_edit">
                 <form  action="/delete_teams" method="post">
                 <input type="hidden" name="item_name" value="{{item[0]}}">
                 <input type="submit" value="delete">  
                 </form>
             </td>
-            <td> 
+            <td class="table_edit"> 
                 <form action="/upload2" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" accept="image/*" multiple>
                     <input type="hidden" name="item_name" value="{{item[0]}}">
-                    <input type="submit" value="send">
+                    <input class="submit" type="submit" value="send">
                 </form>
             </td>
         </tr>
@@ -123,25 +128,28 @@
 
     <div class="table_editor">
         <table title="I'm a table">
-                    
+            
+            <h1 class="robot_title">DRIVE-TRAINS</h1>
+            
             <tr>
                 <th>type</th>
-                <th>delete</th>
+                <th class="table_edit">delete</th>
+                <th class="table_edit">Add image</th>
             </tr>
             {% for item in results3 %}
             <tr>
                 <td>{{ item[1] }}</td>
-                <td>
+                <td class="table_edit">
                     <form action="/delete_drive_train" method="post">
                     <input type="hidden" name="item_name" value="{{item[0]}}">
                     <input type="submit" value="delete">  
                     </form>
                 </td>
-                <td> 
+                <td class="table_edit"> 
                     <form action="/upload3" method="POST" enctype="multipart/form-data">
                         <input type="file" name="file" accept="image/*" multiple>
                         <input type="hidden" name="item_name" value="{{item[0]}}">
-                        <input type="submit" value="send">
+                        <input class="submit" type="submit" value="send">
                     </form>
                 </td>
             </tr>
