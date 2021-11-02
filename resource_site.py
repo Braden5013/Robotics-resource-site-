@@ -25,10 +25,12 @@ def close_connnection(exception):
     if db is not None:
         db.close()
 
+#creates homepage route
 @app.route("/")
 def Home():
     return render_template("Home.html")
 
+#creates robot page route
 @app.route("/Robots")
 def Robots():
         cursor = get_db().cursor()
@@ -36,7 +38,8 @@ def Robots():
         cursor.execute(sql)
         results = cursor.fetchall()
         return render_template("Robots.html", results=results)
-        
+
+#creates route for mechanisims page         
 @app.route("/Mechanisims")
 def Mechanisims():
         cursor = get_db().cursor()
@@ -45,6 +48,7 @@ def Mechanisims():
         results = cursor.fetchall()
         return render_template("Mechanisims.html", results=results)
 
+#creates route for team page
 @app.route("/Teams")
 def Teams():
         cursor = get_db().cursor()
@@ -53,6 +57,7 @@ def Teams():
         results = cursor.fetchall()
         return render_template("Teams.html", results=results)
 
+#creates route for editor 
 @app.route("/Editor")
 def Editor():
         cursor = get_db().cursor()
@@ -71,13 +76,14 @@ def Editor():
         results3 = cursor.fetchall()
         return render_template("Editor.html", results1=results1, results2=results2, results3=results3)
 
+#creates route for layout page
 @app.route("/layout")
 def layout():
     return render_template("layout.html")
 
 
 
-
+#alows me to add new robots to robot table
 @app.route('/add_Robot', methods=["GET","POST"])
 def add_Robot():
     try:
@@ -95,6 +101,7 @@ def add_Robot():
         return redirect('/Error')
     return redirect('/Editor')
 
+#allows me to delete robots on robot database
 @app.route('/delete_Robot', methods=["GET","POST"])
 def delete_Robot():
     if request.method == "POST":
@@ -105,6 +112,7 @@ def delete_Robot():
         get_db().commit()
     return redirect('/Editor') 
 
+#allows me to add teams to the teams data base
 @app.route('/add_teams', methods=["GET","POST"])
 def add_teams():
     try:
@@ -119,6 +127,7 @@ def add_teams():
         return redirect('/Error')
     return redirect('/Editor')
 
+#allows me to delete teams from the teams database
 @app.route('/delete_teams', methods=["GET","POST"])
 def delete_teams():
     if request.method == "POST":
@@ -129,6 +138,7 @@ def delete_teams():
         get_db().commit()
     return redirect('/Editor') 
 
+#allows me to add drive trains to the drive train database
 @app.route('/add_drive_train', methods=["GET","POST"])
 def add_drive_train():
     try:
@@ -143,6 +153,8 @@ def add_drive_train():
         return redirect('/Error')
     return redirect('/Editor')
 
+
+# aloows me to delete drive trains from the drive train database 
 @app.route('/delete_drive_train', methods=["GET","POST"])
 def delete_drive_train():
     if request.method == "POST":
@@ -153,12 +165,13 @@ def delete_drive_train():
         get_db().commit()
     return redirect('/Editor')
 
+#creates route for error page
 @app.route("/Error")
 def Error():
     return render_template("Error.html")
 
-
-@app.route('/upload1',methods=["POST"])
+#uploads and image to website and assigns that image to the coresponding data on the robot database
+@app.route('/upload_robot_image',methods=["POST"])
 def upload1():
     try: 
         request.files['file'].save(f'static/uploads/{request.files["file"].filename}')
@@ -174,7 +187,8 @@ def upload1():
         return redirect('/Error')
     return redirect("/Editor")
 
-@app.route('/upload3',methods=["POST"])
+#uploads and image to website and assigns that image to the coresponding data on the teams database
+@app.route('/upload_drive_train_image',methods=["POST"])
 def upload3():
     try:
         request.files['file'].save(f'static/uploads/{request.files["file"].filename}')
@@ -190,7 +204,8 @@ def upload3():
         return redirect('/Error')
     return redirect("/Editor")
 
-@app.route('/upload2',methods=["POST"])
+#uploads and image to website and assigns that image to the coresponding data on the drive train database
+@app.route('/upload_team_image',methods=["POST"])
 def upload2():
     try:
         request.files['file'].save(f'static/uploads/{request.files["file"].filename}')

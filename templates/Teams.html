@@ -1,3 +1,5 @@
+<!-- this is the page displaying all of the team data -->
+
 {% extends "layout.html" %}
 {% block title %}Teams{% endblock %}
 {% block head %}
@@ -18,11 +20,12 @@
     <p> This page displays all the information ragarding Burnside High schools vex robotics teams past and present </p>
 </div>
 
+<!-- the bellow code turns all of the team table data into cards -->
 <div class="cards_package">
     {% for item in results %}
     <div class="card">
         <img class="robot_image" src="
-        {%- if item[5] -%}
+        {%- if item[2] -%}
             /static/uploads/{{item[2]}}
         {%- else -%}
             /static/defaultimg.gif

@@ -1,3 +1,4 @@
+<!-- this is the page displaying all of the mechanisisms data -->
 {% extends "layout.html" %}
 {% block title %}Mechanisims{% endblock %}
 {% block head %}
@@ -14,6 +15,7 @@
 {% endblock %}
 {% block contents %}
 
+<!-- the bellow code turns all of the mechanisims table data into cards -->
 <div class="Description"> 
     <p> This page displays all the information ragarding Burnside High schools vex robotics mechanisims used past and present </p>
 </div>
@@ -22,7 +24,7 @@
     {% for item in results %}
     <div class="card">
         <img class="robot_image" src="
-        {%- if item[5] -%}
+        {%- if item[2] -%}
             /static/uploads/{{item[2]}}
         {%- else -%}
             /static/defaultimg.gif

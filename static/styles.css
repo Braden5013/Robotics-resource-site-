@@ -200,3 +200,10 @@ tr:nth-child(n) {
   width: 10%;
 
 }
+
+.home_body{
+  padding: 2%;
+  background-color: rgb(189, 189, 189);
+  border-radius: 10px 10px;
+  margin: 2%;
+}

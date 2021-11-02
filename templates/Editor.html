@@ -1,3 +1,4 @@
+<!-- thjis is the code for the editor page -->
 {% extends "layout.html" %}
 {% block title %}Editor{% endblock %}
 {% block head %}
@@ -14,6 +15,8 @@
 {% endblock %}
 {% block contents %}
 
+
+<!-- This div holds the code for the robot table and robot table editor -->
 <div class="table_editor">
 <table> 
 
@@ -41,7 +44,7 @@
                 </form>
             </td> 
             <td class="table_edit"> 
-                <form action="/upload1" method="POST" enctype="multipart/form-data">
+                <form action="/upload_robot_image" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" accept="image/*" multiple>
                     <input type="hidden" name="item_name" value="{{item[0]}}">
                     <input class="submit" type="submit" value="send">
@@ -89,6 +92,9 @@
     <input type="submit" Value="add">
 </form>
 </div>
+<!-- end of robot table -->
+
+<!-- This div holds the code for the team table and team table editor -->
 <div class="table_editor">
     <table title="I'm a table">
           
@@ -109,7 +115,7 @@
                 </form>
             </td>
             <td class="table_edit"> 
-                <form action="/upload2" method="POST" enctype="multipart/form-data">
+                <form action="/upload_team_image" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" accept="image/*" multiple>
                     <input type="hidden" name="item_name" value="{{item[0]}}">
                     <input class="submit" type="submit" value="send">
@@ -124,42 +130,45 @@
         <input type="text" name="name" placeholder="Insert team name here" maxlength="15">
         <input type="submit" Value="add">
     </form>
-    </div>
+</div>
+<!-- end of teams section -->
 
-    <div class="table_editor">
-        <table title="I'm a table">
-            
-            <h1 class="robot_title">DRIVE-TRAINS</h1>
-            
-            <tr>
-                <th>type</th>
-                <th class="table_edit">delete</th>
-                <th class="table_edit">Add image</th>
-            </tr>
-            {% for item in results3 %}
-            <tr>
-                <td>{{ item[1] }}</td>
-                <td class="table_edit">
-                    <form action="/delete_drive_train" method="post">
-                    <input type="hidden" name="item_name" value="{{item[0]}}">
-                    <input type="submit" value="delete">  
-                    </form>
-                </td>
-                <td class="table_edit"> 
-                    <form action="/upload3" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="file" accept="image/*" multiple>
-                        <input type="hidden" name="item_name" value="{{item[0]}}">
-                        <input class="submit" type="submit" value="send">
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+<!-- This div holds the code for the drive train table and drive train table editor -->
+<div class="table_editor">
+    <table title="I'm a table">
         
-        <form class="add" action="/add_drive_train" method="post">
-            <h1>Enter a new item</h2>
-            <input type="text" name="type" placeholder="Insert drive train type here" maxlength="25">
-            <input type="submit" Value="add">
-        </form>
-        </div>
+        <h1 class="robot_title">DRIVE-TRAINS</h1>
+        
+        <tr>
+            <th>type</th>
+            <th class="table_edit">delete</th>
+            <th class="table_edit">Add image</th>
+        </tr>
+        {% for item in results3 %}
+        <tr>
+            <td>{{ item[1] }}</td>
+            <td class="table_edit">
+                <form action="/delete_drive_train" method="post">
+                <input type="hidden" name="item_name" value="{{item[0]}}">
+                <input type="submit" value="delete">  
+                </form>
+            </td>
+            <td class="table_edit"> 
+                <form action="/upload_drive_train_image" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/*" multiple>
+                    <input type="hidden" name="item_name" value="{{item[0]}}">
+                    <input class="submit" type="submit" value="send">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    <form class="add" action="/add_drive_train" method="post">
+        <h1>Enter a new item</h2>
+        <input type="text" name="type" placeholder="Insert drive train type here" maxlength="25">
+        <input type="submit" Value="add">
+    </form>
+</div>
+<!-- end of drive train table -->
 {% endblock %}
